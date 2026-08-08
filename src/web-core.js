@@ -34,12 +34,17 @@ export function feetInchesToFeet(feet, inches=0) {
 export function parseImperialDepth(value) {
   if (value == null || value === '') return null;
   if (typeof value === 'number') return Number.isFinite(value) ? value : null;
-  const raw = String(value).trim().toLowerCase();
+  const raw = String(value).trim().toLowerCase().replace(/[–—]/g, '-');
   if (!raw) return null;
   if (/^-?\d+(?:\.\d+)?$/.test(raw)) return Number(raw);
-  const match = raw.match(/(-?\d+(?:\.\d+)?)\s*(?:ft|feet|foot|')?\s*(?:(\d+(?:\.\d+)?)\s*(?:in|inch|inches|"))?/i);
-  if (!match) return null;
-  return feetInchesToFeet(Number(match[1]), Number(match[2] || 0));
+
+  const explicit = raw.match(/^(-?\d+(?:\.\d+)?)\s*(?:ft|feet|foot|')\s*(?:-\s*)?(?:(\d+(?:\.\d+)?)\s*(?:in|inch|inches|")?)?$/i);
+  if (explicit) return feetInchesToFeet(Number(explicit[1]), Number(explicit[2] || 0));
+
+  const dashed = raw.match(/^(-?\d+)\s*-\s*(\d+(?:\.\d+)?)\s*(?:in|inch|inches|")?$/i);
+  if (dashed) return feetInchesToFeet(Number(dashed[1]), Number(dashed[2]));
+
+  return null;
 }
 
 export function formatFeetInches(metres) {
