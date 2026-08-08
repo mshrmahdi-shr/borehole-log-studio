@@ -1,0 +1,41 @@
+{
+  "project": {
+    "name": "Fixture Project",
+    "number": "FX-001",
+    "location": "Toronto"
+  },
+  "boreholes": [
+    {
+      "id": "fixture",
+      "name": "BH99",
+      "totalDepth": 3.0,
+      "groundElevation": 100,
+      "drillingMethod": "Hollow Stem Auger",
+      "drillDate": "2026-07-30",
+      "monitoringWell": false,
+      "screenTop": 0,
+      "screenBottom": 0,
+      "waterDepth": null,
+      "layers": [
+        {
+          "id": "l1",
+          "from": 0,
+          "to": 1,
+          "material": "FILL",
+          "moisture": "Moist",
+          "description": "Brown fill"
+        },
+        {
+          "id": "l2",
+          "from": 1,
+          "to": 3,
+          "material": "SILT",
+          "moisture": "Moist",
+          "description": "Grey silt"
+        }
+      ],
+      "samples": [],
+      "tests": []
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Borehole ID,From Depth,To Depth,Soil Type,Description,Sample ID,Analyses,PID,SPT N,SPT Blows
+BH101(MW),0,0.5,FILL,Brown sand and gravel,26-1001-1,"Metals, PHCs",1.2,8,2-3-5
+BH101(MW),0.5,2.0,SILT,"Brown silt, trace clay",26-1001-2,"VOCs, PAHs",0,14,4-6-8
+BH101(MW),2.0,5.0,CLAYEY SILT,Grey clayey silt,,,2.4,20,6-9-11

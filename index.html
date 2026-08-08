@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Borehole Log Studio</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div><h1>Borehole Log Studio</h1><span>Environmental & Geotechnical Borehole Log Editor</span></div>
+    <div class="toolbar">
+      <button id="newProjectBtn">New</button><button id="saveBtn">Save</button>
+      <button id="importBtn" class="primary">Import Files</button>
+      <input id="importFile" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.xlsx,.xls,.csv,.json" multiple hidden />
+      <button id="exportJsonBtn">Export JSON</button><button id="exportCsvBtn">Export CSV</button>
+      <button id="exportDxfBtn">Export DXF</button><button id="printBtn">Print / PDF</button>
+    </div>
+  </header>
+
+  <section id="dropZone" class="drop-zone">
+    <div class="drop-icon">⇩</div>
+    <div><strong>Drop PDF, image, Excel, CSV, or JSON files here</strong><small>PDF/image OCR runs locally in your browser. Extracted values open for review before import.</small></div>
+    <button id="browseBtn">Choose Files</button>
+  </section>
+
+  <section id="importPanel" class="import-panel hidden">
+    <div class="import-head"><div><h2>Import & OCR Review</h2><p id="importStatus">Preparing…</p></div><button id="closeImportBtn">×</button></div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div class="review-grid">
+      <div class="source-preview"><h3>Source preview</h3><div id="sourcePreview" class="preview-box">No preview</div></div>
+      <div class="extracted-review">
+        <h3>Extracted boreholes</h3>
+        <div id="extractedList" class="extracted-list"></div>
+        <label>Raw extracted text<textarea id="rawText" rows="10"></textarea></label>
+        <div class="review-actions"><button id="cancelImportBtn">Cancel</button><button id="applyImportBtn" class="primary">Add to Project</button></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="app-grid">
+    <aside class="sidebar panel">
+      <h2>Project</h2><label>Project Name<input id="projectName" /></label><label>Project No.<input id="projectNumber" /></label><label>Location<input id="projectLocation" /></label>
+      <div class="section-title"><h2>Boreholes</h2><button id="addBoreholeBtn">+ Add</button></div><div id="boreholeList" class="borehole-list"></div>
+    </aside>
+    <section class="workspace panel">
+      <div class="workspace-header"><div><h2 id="activeBoreholeTitle">Borehole</h2><div id="validationSummary" class="validation-summary"></div></div><label>Scale <select id="scaleSelect"><option value="90">90 px/m</option><option value="70">70 px/m</option><option value="55">55 px/m</option></select></label></div>
+      <div id="logScroller" class="log-scroller"><svg id="boreholeSvg" xmlns="http://www.w3.org/2000/svg"></svg></div>
+    </section>
+    <aside class="properties panel">
+      <h2>Borehole Details</h2><label>ID<input id="bhId" /></label><label>Total Depth (m)<input id="bhDepth" type="number" min="0.1" step="0.01" /></label><label>Ground Elevation (m)<input id="groundElevation" type="number" step="0.01" /></label><label>Drilling Method<input id="drillingMethod" /></label><label>Drill Date<input id="drillDate" type="date" /></label><label><input id="isMonitoringWell" type="checkbox" /> Monitoring Well</label>
+      <div id="wellFields" class="well-fields"><label>Screen Top (m)<input id="screenTop" type="number" step="0.01" /></label><label>Screen Bottom (m)<input id="screenBottom" type="number" step="0.01" /></label><label>Water Depth (m)<input id="waterDepth" type="number" step="0.01" /></label></div>
+    </aside>
+    <section class="data-panel panel">
+      <div class="tabs"><button class="tab active" data-tab="lithology">Lithology</button><button class="tab" data-tab="samples">Samples</button><button class="tab" data-tab="tests">SPT / PID</button></div>
+      <div id="lithologyTab" class="tab-content active"><div class="table-actions"><button id="addLayerBtn">+ Add Layer</button></div><div class="table-wrap"><table><thead><tr><th>From</th><th>To</th><th>Material</th><th>Moisture</th><th>Description</th><th></th></tr></thead><tbody id="layersBody"></tbody></table></div></div>
+      <div id="samplesTab" class="tab-content"><div class="table-actions"><button id="addSampleBtn">+ Add Sample</button></div><div class="table-wrap"><table><thead><tr><th>From</th><th>To</th><th>Sample ID</th><th>Analyses</th><th></th></tr></thead><tbody id="samplesBody"></tbody></table></div></div>
+      <div id="testsTab" class="tab-content"><div class="table-actions"><button id="addTestBtn">+ Add Test</button></div><div class="table-wrap"><table><thead><tr><th>Depth</th><th>SPT Blows</th><th>N</th><th>PID (ppm)</th><th></th></tr></thead><tbody id="testsBody"></tbody></table></div></div>
+    </section>
+  </main>
+  <footer>Files are processed in this browser. This build requires internet access to load the PDF, OCR, and spreadsheet libraries.</footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
