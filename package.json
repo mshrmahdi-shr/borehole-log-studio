@@ -1,23 +1,21 @@
 {
-  "name": "borehole-log-studio-desktop",
+  "name": "borehole-log-studio",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/copy-ocr-assets.mjs && vite build",
+    "build": "vite build",
     "preview": "vite preview",
+    "test:web": "node scripts/web-regression.mjs",
+    "test:source": "node scripts/source-check.mjs",
+    "check": "npm run test:web && npm run test:source && npm run build",
     "tauri": "tauri",
-    "desktop:dev": "npm run prepare:ocr && tauri dev",
-    "desktop:build": "npm run prepare:ocr && tauri build",
-    "prepare:ocr": "node scripts/copy-ocr-assets.mjs",
-    "test:source": "node scripts/source-check.mjs"
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build"
   },
   "dependencies": {
-    "@tesseract.js-data/eng": "^1.0.0",
     "pdfjs-dist": "^4.10.38",
-    "tesseract.js": "^5.1.1",
-    "tesseract.js-core": "^5.1.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
