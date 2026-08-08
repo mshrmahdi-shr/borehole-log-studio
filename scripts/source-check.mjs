@@ -14,10 +14,11 @@ async function checkFile(file) {
     .replace(/https:\/\/schema\.tauri\.app\/config\/2/g, '')
     .replace(/http:\/\/localhost:1420/g, '')
     .replace(/http:\/\/www\.w3\.org\/2000\/svg/g, '')
-    .replace(/http:\/\/ipc\.localhost/g, '');
+    .replace(/http:\/\/ipc\.localhost/g, '')
+    .replace(/https:\/\/generativelanguage\.googleapis\.com/g, '');
 
   if (/https?:\/\//i.test(cleaned)) {
-    console.error(`External URL found in runtime source: ${relative(root, file)}`);
+    console.error(`Unexpected external URL found in runtime source: ${relative(root, file)}`);
     failures++;
   }
 
@@ -43,5 +44,5 @@ for (const dir of runtimeRoots) await walk(dir);
 for (const file of runtimeFiles) await checkFile(file);
 
 if (failures) process.exit(1);
-console.log('PASS: English-only runtime source and no external runtime URLs.');
+console.log('PASS: English-only runtime source. External access is limited to the explicitly allowed optional Gemini Vision endpoint.');
 console.log(`Project root: ${root}`);
