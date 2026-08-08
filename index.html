@@ -20,7 +20,7 @@
 
   <section id="dropZone" class="drop-zone">
     <div class="drop-icon">⇩</div>
-    <div><strong>Drop PDF, image, Excel, CSV, or JSON files here</strong><small>PDF/image OCR runs locally in your browser. Extracted values open for review before import.</small></div>
+    <div><strong>Drop PDF, image, Excel, CSV, or JSON files here</strong><small>PDF/image OCR runs locally on this computer. Extracted values open for review before import.</small></div>
     <button id="browseBtn">Choose Files</button>
   </section>
 
@@ -58,7 +58,7 @@
       <div id="testsTab" class="tab-content"><div class="table-actions"><button id="addTestBtn">+ Add Test</button></div><div class="table-wrap"><table><thead><tr><th>Depth</th><th>SPT Blows</th><th>N</th><th>PID (ppm)</th><th></th></tr></thead><tbody id="testsBody"></tbody></table></div></div>
     </section>
   </main>
-  <footer>Files are processed in this browser. This build requires internet access to load the PDF, OCR, and spreadsheet libraries.</footer>
-  <script type="module" src="app.js"></script>
+  <footer>Files are processed locally on this computer. No cloud API is required for the core import and OCR workflow.</footer>
+  <script type="module" src="/src/app.js"></script>
 </body>
 </html>
