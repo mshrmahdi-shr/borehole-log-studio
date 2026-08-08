@@ -3,6 +3,7 @@ import {
   SHEET_DEPTH_M, sheetCount, sheetRanges, ftToM, mToFt, parseImperialDepth,
   formatFeetInches, sanitizeAiPage, mergeBoreholePages, validateBorehole
 } from '../src/web-core.js';
+import { materialComponents, compositeHatchKey, renderReferenceSheet } from '../src/reference-layout.js';
 
 assert.equal(SHEET_DEPTH_M, 11);
 assert.equal(sheetCount(0), 1);
@@ -23,12 +24,17 @@ assert.equal(parseImperialDepth("7'-6\""), 7.5);
 assert.equal(parseImperialDepth('15 ft 3 in'), 15.25);
 assert.equal(formatFeetInches(3.048), "10'-0\"");
 
+assert.deepEqual(materialComponents('SANDY SILT'), ['SAND','SILT']);
+assert.deepEqual(materialComponents('CLAYEY SAND'), ['SAND','CLAY']);
+assert.deepEqual(materialComponents('SAND & GRAVEL TO GRAVELLY SAND'), ['GRAVEL','SAND']);
+assert.equal(compositeHatchKey('CLAYEY SANDY SILT'), 'SAND+SILT+CLAY');
+
 const ai = sanitizeAiPage({
   borehole_id:'BH-7',
   total_depth_ft:"26'-4\"",
   layers:[
     { from_ft:0, to_ft:2.5, material:'TOPSOIL', description:'dark brown', confidence:.95, box:[10,20,300,80] },
-    { from_ft:2.5, to_ft:8, material:'SILTY SAND', description:'trace gravel', confidence:.7 }
+    { from_ft:2.5, to_ft:8, material:'SANDY SILT', description:'trace gravel', confidence:.7 }
   ],
   samples:[{ sample_id:'SS-1', from_ft:1, to_ft:2.5, analyses:[], confidence:.9 }],
   tests:[{ depth_ft:2.5, spt_blows:'2-3-4', n_value:7, pid_ppm:null, confidence:.8 }],
@@ -49,4 +55,12 @@ assert.equal(merged.layers.length, 3);
 assert.ok(merged.totalDepthM > 18.7 && merged.totalDepthM < 18.8);
 assert.equal(sheetCount(merged.totalDepthM), 2);
 
-console.log('PASS web regression: fixed 11 m sheets, dual-unit conversion, AI sanitization, no fabricated analyses.');
+const sheet=renderReferenceSheet({project:{name:'Test',number:'26-1',location:'Ontario'},borehole:{...ai,layers:ai.layers.map(x=>({...x,status:'accepted'})),samples:ai.samples.map(x=>({...x,status:'accepted'})),tests:ai.tests.map(x=>({...x,status:'accepted'}))},range:{index:0,fromM:0,toM:11},sheetIndex:0,sheetTotal:1});
+assert.match(sheet,/DEPTH/);
+assert.match(sheet,/WELL CONSTRUCTION/);
+assert.match(sheet,/SANDY SILT/);
+assert.match(sheet,/Fixed|Depth window/);
+assert.match(sheet,/SAND/);
+assert.match(sheet,/SILT/);
+
+console.log('PASS web regression: fixed 11 m sheets, dual-unit conversion, AI sanitization, composite hatches, reference layout.');
