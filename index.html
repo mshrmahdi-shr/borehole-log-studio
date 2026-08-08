@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Borehole Log Studio v0.3</title>
+  <title>Borehole Log Studio v0.4</title>
   <link rel="stylesheet" href="/src/styles.css" />
   <style id="dynamicPrintStyle"></style>
 </head>
 <body>
   <header class="topbar">
-    <div><h1>Borehole Log Studio <span class="version">v0.3</span></h1><span>Environmental & Geotechnical Borehole Log Editor</span></div>
+    <div><h1>Borehole Log Studio <span class="version">v0.4</span></h1><span>Environmental & Geotechnical Borehole Log Editor</span></div>
     <div class="toolbar">
       <button id="newProjectBtn">New</button><button id="saveBtn">Save</button>
       <button id="importBtn" class="primary">Import Files</button>
@@ -83,7 +83,8 @@
   </section>
 
   <div id="printSheetArea" class="print-sheet-area"></div>
-  <footer>Core project editing, file parsing, and OCR assets are designed to run locally in the desktop build.</footer>
+  <footer>Core project editing, file parsing, and OCR assets are designed to run locally in the desktop build. AI Handwriting Assistant is optional and only sends pages when you explicitly run it.</footer>
   <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/v04.js"></script>
 </body>
 </html>
