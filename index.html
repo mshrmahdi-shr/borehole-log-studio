@@ -10,8 +10,8 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <h1>Borehole Log Studio <span class="version">Web v0.5.2</span></h1>
-      <p>Environmental & geotechnical borehole logs • fixed 11 m sheets • metres + feet</p>
+      <h1>Borehole Log Studio <span class="version">Web v0.6</span></h1>
+      <p>Professional reference-log layout • fixed 11 m sheets • composite soil hatches • metres + feet</p>
     </div>
     <div class="toolbar">
       <button id="newProject">New</button><button id="saveProject">Save</button><button id="importFiles" class="primary">Import / Review</button>
@@ -19,7 +19,7 @@
       <button id="exportJson">JSON</button><button id="exportCsv">CSV</button><button id="exportDxf">DXF</button><button id="printAll" class="primary">Print All Sheets</button>
     </div>
   </header>
-  <div class="statusbar"><span><strong>Web workflow:</strong> native PDF first, Vision AI only when requested, manual correction always available.</span><span id="saveStateText">Saved locally</span></div>
+  <div class="statusbar"><span><strong>Web v0.6:</strong> reference-log layout • fixed 11 m sheets • composite soil hatches • AI/manual review.</span><span id="saveStateText">Saved locally</span></div>
   <main class="layout">
     <aside class="panel side">
       <h2>Project</h2><label>Project Name<input id="projectName" /></label><label>Project No.<input id="projectNumber" /></label><label>Location<input id="projectLocation" /></label>
@@ -49,16 +49,16 @@
         <label class="inline-check" style="margin:0 0 5px"><input id="rememberKey" type="checkbox" /> Remember key on this computer</label>
         <button id="analyzePage" class="primary">Analyze Page</button><button id="analyzeAll">Analyze All</button><button id="analyzeRegion">Read Selected Area</button>
       </div>
-      <div style="padding:5px 12px;border-bottom:1px solid #d6e0e8;background:#fff"><div style="display:flex;justify-content:space-between;font-size:10px"><span id="aiStatus">AI router v2 bundled loading…</span><button id="acceptHigh" style="padding:2px 7px">Accept ≥85%</button></div><div class="progress"><div id="aiBar"></div></div></div>
+      <div style="padding:5px 12px;border-bottom:1px solid #d6e0e8;background:#fff"><div style="display:flex;justify-content:space-between;font-size:10px"><span id="aiStatus">AI router loading…</span><button id="acceptHigh" style="padding:2px 7px">Accept ≥85%</button></div><div class="progress"><div id="aiBar"></div></div></div>
       <div class="review-body"><div class="source-review"><div class="source-review-tools"><button id="sourcePrev">← Page</button><button id="sourceNext">Page →</button><span id="reviewPageText"></span></div><div id="reviewImageWrap" class="source-canvas-wrap"></div></div>
         <div class="review-side"><div class="ai-note"><strong>Engineering review rule:</strong> every AI item starts as Draft. A Draft must be accepted, manually corrected, or ignored before it can be applied to the project. Blank/illegible values are meant to be typed manually.</div><div class="review-fields"><label>Borehole ID<input id="reviewBhName" /></label><label>Total Depth<input id="reviewBhDepth" placeholder="m or 26 ft 4 in" /></label><label>Ground Elevation (m)<input id="reviewElevation" type="number" step=".01" /></label></div><div id="reviewSummary" class="review-summary"></div><div id="reviewWarnings" class="review-summary"></div>
           <div class="review-section"><div class="review-section-head"><strong>Lithology</strong><button id="addReviewLayer">+ Manual Layer</button></div><div id="reviewLayers"></div></div><div class="review-section"><div class="review-section-head"><strong>Samples / Analyses</strong><button id="addReviewSample">+ Manual Sample</button></div><div id="reviewSamples"></div></div><div class="review-section"><div class="review-section-head"><strong>SPT / PID</strong><button id="addReviewTest">+ Manual Test</button></div><div id="reviewTests"></div></div>
         </div>
       </div>
-      <div class="review-footer"><span style="margin-right:auto;font-size:10px;color:#657581">Drag a rectangle over the source page to re-read a difficult handwritten region.</span><button id="applyReview" class="primary">Apply Reviewed Draft</button></div>
+      <div class="review-footer"><span style="margin-right:auto;font-size:10px;color:#657581">Analyze All creates a review queue. Resolve drafts, then use Apply All Ready Drafts to add every ready borehole.</span><button id="applyReview" class="primary">Apply Reviewed Draft</button></div>
     </div>
   </section>
   <div id="printArea" class="print-area"></div><div id="toast" class="toast hidden"></div>
-  <script type="module" src="/src/web-entry.js"></script>
+  <script type="module" src="/src/web-entry-v06.js"></script>
 </body>
 </html>
