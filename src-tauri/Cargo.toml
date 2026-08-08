@@ -1,6 +1,6 @@
 [package]
 name = "borehole-log-studio"
-version = "0.2.0"
+version = "0.3.0"
 description = "Offline desktop borehole log editor"
 authors = ["Borehole Log Studio"]
 edition = "2021"
