@@ -24,6 +24,10 @@ jobs:
           node-version: 24
       - name: Install dependencies
         run: npm install
+      - name: Regression tests
+        run: npm run test:web
+      - name: Source checks
+        run: npm run test:source
       - name: Build web app
         env:
           DEPLOY_TARGET: pages
