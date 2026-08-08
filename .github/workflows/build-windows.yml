@@ -3,8 +3,6 @@ name: Build Windows Desktop
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
     tags:
       - 'v*'
 
@@ -22,6 +20,8 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
       - name: Install frontend dependencies
         run: npm install
+      - name: Web regression tests
+        run: npm run test:web
       - name: Source checks
         run: npm run test:source
       - name: Build Windows installers
