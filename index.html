@@ -110,14 +110,15 @@
       </div>
       <div class="review-toolbar">
         <label>Gemini API Key<input id="aiKey" type="password" autocomplete="off" placeholder="Used only when you run Vision AI" /></label>
-        <label>Model<input id="aiModel" value="gemini-2.5-flash" /></label>
+        <label>Model<input id="aiModel" value="auto" list="aiModelOptions" /><datalist id="aiModelOptions"></datalist></label>
+        <button id="refreshAiModels" type="button">Refresh Models</button>
         <label class="inline-check" style="margin:0 0 5px"><input id="rememberKey" type="checkbox" /> Remember key on this computer</label>
         <button id="analyzePage" class="primary">Analyze Page</button>
         <button id="analyzeAll">Analyze All</button>
         <button id="analyzeRegion">Read Selected Area</button>
       </div>
       <div style="padding:5px 12px;border-bottom:1px solid #d6e0e8;background:#fff">
-        <div style="display:flex;justify-content:space-between;font-size:10px"><span id="aiStatus">No AI request has been made. Native PDF/manual review stays local.</span><button id="acceptHigh" style="padding:2px 7px">Accept ≥85%</button></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px"><span id="aiStatus">Model selection is automatic. Enter your API key, then analyze or refresh the model list.</span><button id="acceptHigh" style="padding:2px 7px">Accept ≥85%</button></div>
         <div class="progress"><div id="aiBar"></div></div>
       </div>
 
@@ -160,6 +161,7 @@
 
   <div id="printArea" class="print-area"></div>
   <div id="toast" class="toast hidden"></div>
+  <script src="/src/ai-model-router.js"></script>
   <script type="module" src="/src/web-app.js"></script>
 </body>
 </html>
