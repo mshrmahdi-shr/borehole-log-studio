@@ -10,7 +10,7 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <h1>Borehole Log Studio <span class="version">Web v0.5</span></h1>
+      <h1>Borehole Log Studio <span class="version">Web v0.5.1</span></h1>
       <p>Environmental & geotechnical borehole logs • fixed 11 m sheets • metres + feet</p>
     </div>
     <div class="toolbar">
@@ -36,29 +36,15 @@
       <label>Project Name<input id="projectName" /></label>
       <label>Project No.<input id="projectNumber" /></label>
       <label>Location<input id="projectLocation" /></label>
-
       <div class="section-head"><h2>Boreholes</h2><button id="addBorehole">+ Add</button></div>
       <div id="boreholeList" class="borehole-list"></div>
-
       <div class="section-head"><h2>Sources</h2></div>
       <div id="sourceList" class="source-list"></div>
-      <div id="dropZone" style="margin-top:10px;border:2px dashed #9ab2c4;border-radius:8px;padding:12px;text-align:center;font-size:10px;color:#607481;background:#f7fafc">
-        Drop PDF, image, Excel, CSV or JSON here
-      </div>
+      <div id="dropZone" style="margin-top:10px;border:2px dashed #9ab2c4;border-radius:8px;padding:12px;text-align:center;font-size:10px;color:#607481;background:#f7fafc">Drop PDF, image, Excel, CSV or JSON here</div>
     </aside>
 
     <section class="panel workspace">
-      <div class="workspace-head">
-        <div>
-          <h2 id="activeBoreholeTitle">Borehole</h2>
-          <div class="sub" id="sheetCounter">Sheet 1 of 1 • 0–11 m</div>
-        </div>
-        <div class="sheet-controls">
-          <button id="prevSheet">← Previous</button>
-          <button id="nextSheet">Next →</button>
-          <span id="validation" class="validation ok">Validated</span>
-        </div>
-      </div>
+      <div class="workspace-head"><div><h2 id="activeBoreholeTitle">Borehole</h2><div class="sub" id="sheetCounter">Sheet 1 of 1 • 0–11 m</div></div><div class="sheet-controls"><button id="prevSheet">← Previous</button><button id="nextSheet">Next →</button><span id="validation" class="validation ok">Validated</span></div></div>
       <div class="sheet-stage"><div id="sheetHost"></div></div>
     </section>
 
@@ -70,98 +56,45 @@
       <label>Drilling Method<input id="drillingMethod" /></label>
       <label>Drill Date<input id="drillDate" type="date" /></label>
       <label class="inline-check"><input id="wellEnabled" type="checkbox" /> Monitoring Well</label>
-      <div id="wellFields" class="well-fields">
-        <label>Riser Bottom (m)<input id="riserBottom" type="number" step=".01" /></label>
-        <label>Screen Top (m)<input id="screenTop" type="number" step=".01" /></label>
-        <label>Screen Bottom (m)<input id="screenBottom" type="number" step=".01" /></label>
-        <label>Water Depth (m)<input id="waterDepth" type="number" step=".01" /></label>
-      </div>
+      <div id="wellFields" class="well-fields"><label>Riser Bottom (m)<input id="riserBottom" type="number" step=".01" /></label><label>Screen Top (m)<input id="screenTop" type="number" step=".01" /></label><label>Screen Bottom (m)<input id="screenBottom" type="number" step=".01" /></label><label>Water Depth (m)<input id="waterDepth" type="number" step=".01" /></label></div>
     </aside>
 
     <section class="panel editor">
-      <div class="tabs">
-        <button class="tab active" data-tab="layersPane">Lithology</button>
-        <button class="tab" data-tab="samplesPane">Samples / Analyses</button>
-        <button class="tab" data-tab="testsPane">SPT / PID</button>
-      </div>
-      <div id="layersPane" class="tab-pane active">
-        <div class="table-actions"><button id="addLayer">+ Add Layer</button><span>Manual edits override AI confidence and become Manual status.</span></div>
-        <div class="table-wrap"><table><thead><tr><th>From m</th><th>To m</th><th>Material</th><th>Moisture</th><th>Description</th><th>Status</th><th></th></tr></thead><tbody id="layersBody"></tbody></table></div>
-      </div>
-      <div id="samplesPane" class="tab-pane">
-        <div class="table-actions"><button id="addSample">+ Add Sample</button><span>Analyses are never auto-filled unless supported by the source.</span></div>
-        <div class="table-wrap"><table><thead><tr><th>From m</th><th>To m</th><th>Sample ID</th><th>Analyses</th><th>Status</th><th></th></tr></thead><tbody id="samplesBody"></tbody></table></div>
-      </div>
-      <div id="testsPane" class="tab-pane">
-        <div class="table-actions"><button id="addTest">+ Add Test</button><span>Enter exact SPT / PID values when handwriting is uncertain.</span></div>
-        <div class="table-wrap"><table><thead><tr><th>Depth m</th><th>SPT Blows</th><th>N</th><th>PID ppm</th><th>Status</th><th></th></tr></thead><tbody id="testsBody"></tbody></table></div>
-      </div>
+      <div class="tabs"><button class="tab active" data-tab="layersPane">Lithology</button><button class="tab" data-tab="samplesPane">Samples / Analyses</button><button class="tab" data-tab="testsPane">SPT / PID</button></div>
+      <div id="layersPane" class="tab-pane active"><div class="table-actions"><button id="addLayer">+ Add Layer</button><span>Manual edits override AI confidence and become Manual status.</span></div><div class="table-wrap"><table><thead><tr><th>From m</th><th>To m</th><th>Material</th><th>Moisture</th><th>Description</th><th>Status</th><th></th></tr></thead><tbody id="layersBody"></tbody></table></div></div>
+      <div id="samplesPane" class="tab-pane"><div class="table-actions"><button id="addSample">+ Add Sample</button><span>Analyses are never auto-filled unless supported by the source.</span></div><div class="table-wrap"><table><thead><tr><th>From m</th><th>To m</th><th>Sample ID</th><th>Analyses</th><th>Status</th><th></th></tr></thead><tbody id="samplesBody"></tbody></table></div></div>
+      <div id="testsPane" class="tab-pane"><div class="table-actions"><button id="addTest">+ Add Test</button><span>Enter exact SPT / PID values when handwriting is uncertain.</span></div><div class="table-wrap"><table><thead><tr><th>Depth m</th><th>SPT Blows</th><th>N</th><th>PID ppm</th><th>Status</th><th></th></tr></thead><tbody id="testsBody"></tbody></table></div></div>
     </section>
   </main>
 
   <section id="reviewModal" class="modal hidden">
     <div class="review-shell">
-      <div class="review-head">
-        <div><h2>Source + AI / Manual Review</h2><p id="reviewSourceName">Source</p></div>
-        <div class="review-head-actions">
-          <button id="draftPrev">← Draft</button><span id="draftNav" style="font-size:10px;align-self:center"></span><button id="draftNext">Draft →</button>
-          <button id="closeReview">× Close</button>
-        </div>
-      </div>
+      <div class="review-head"><div><h2>Source + AI / Manual Review</h2><p id="reviewSourceName">Source</p></div><div class="review-head-actions"><button id="draftPrev">← Draft</button><span id="draftNav" style="font-size:10px;align-self:center"></span><button id="draftNext">Draft →</button><button id="closeReview">× Close</button></div></div>
       <div class="review-toolbar">
         <label>Gemini API Key<input id="aiKey" type="password" autocomplete="off" placeholder="Used only when you run Vision AI" /></label>
         <label>Model<input id="aiModel" value="auto" list="aiModelOptions" /><datalist id="aiModelOptions"></datalist></label>
         <button id="refreshAiModels" type="button">Refresh Models</button>
         <label class="inline-check" style="margin:0 0 5px"><input id="rememberKey" type="checkbox" /> Remember key on this computer</label>
-        <button id="analyzePage" class="primary">Analyze Page</button>
-        <button id="analyzeAll">Analyze All</button>
-        <button id="analyzeRegion">Read Selected Area</button>
+        <button id="analyzePage" class="primary">Analyze Page</button><button id="analyzeAll">Analyze All</button><button id="analyzeRegion">Read Selected Area</button>
       </div>
-      <div style="padding:5px 12px;border-bottom:1px solid #d6e0e8;background:#fff">
-        <div style="display:flex;justify-content:space-between;font-size:10px"><span id="aiStatus">Model selection is automatic. Enter your API key, then analyze or refresh the model list.</span><button id="acceptHigh" style="padding:2px 7px">Accept ≥85%</button></div>
-        <div class="progress"><div id="aiBar"></div></div>
-      </div>
-
+      <div style="padding:5px 12px;border-bottom:1px solid #d6e0e8;background:#fff"><div style="display:flex;justify-content:space-between;font-size:10px"><span id="aiStatus">AI router v2 loading…</span><button id="acceptHigh" style="padding:2px 7px">Accept ≥85%</button></div><div class="progress"><div id="aiBar"></div></div></div>
       <div class="review-body">
-        <div class="source-review">
-          <div class="source-review-tools">
-            <button id="sourcePrev">← Page</button><button id="sourceNext">Page →</button>
-            <span id="reviewPageText"></span>
-          </div>
-          <div id="reviewImageWrap" class="source-canvas-wrap"></div>
-        </div>
-
+        <div class="source-review"><div class="source-review-tools"><button id="sourcePrev">← Page</button><button id="sourceNext">Page →</button><span id="reviewPageText"></span></div><div id="reviewImageWrap" class="source-canvas-wrap"></div></div>
         <div class="review-side">
           <div class="ai-note"><strong>Engineering review rule:</strong> every AI item starts as Draft. A Draft must be accepted, manually corrected, or ignored before it can be applied to the project. Blank/illegible values are meant to be typed manually.</div>
-          <div class="review-fields">
-            <label>Borehole ID<input id="reviewBhName" /></label>
-            <label>Total Depth<input id="reviewBhDepth" placeholder="m or 26 ft 4 in" /></label>
-            <label>Ground Elevation (m)<input id="reviewElevation" type="number" step=".01" /></label>
-          </div>
-          <div id="reviewSummary" class="review-summary"></div>
-          <div id="reviewWarnings" class="review-summary"></div>
-
-          <div class="review-section">
-            <div class="review-section-head"><strong>Lithology</strong><button id="addReviewLayer">+ Manual Layer</button></div>
-            <div id="reviewLayers"></div>
-          </div>
-          <div class="review-section">
-            <div class="review-section-head"><strong>Samples / Analyses</strong><button id="addReviewSample">+ Manual Sample</button></div>
-            <div id="reviewSamples"></div>
-          </div>
-          <div class="review-section">
-            <div class="review-section-head"><strong>SPT / PID</strong><button id="addReviewTest">+ Manual Test</button></div>
-            <div id="reviewTests"></div>
-          </div>
+          <div class="review-fields"><label>Borehole ID<input id="reviewBhName" /></label><label>Total Depth<input id="reviewBhDepth" placeholder="m or 26 ft 4 in" /></label><label>Ground Elevation (m)<input id="reviewElevation" type="number" step=".01" /></label></div>
+          <div id="reviewSummary" class="review-summary"></div><div id="reviewWarnings" class="review-summary"></div>
+          <div class="review-section"><div class="review-section-head"><strong>Lithology</strong><button id="addReviewLayer">+ Manual Layer</button></div><div id="reviewLayers"></div></div>
+          <div class="review-section"><div class="review-section-head"><strong>Samples / Analyses</strong><button id="addReviewSample">+ Manual Sample</button></div><div id="reviewSamples"></div></div>
+          <div class="review-section"><div class="review-section-head"><strong>SPT / PID</strong><button id="addReviewTest">+ Manual Test</button></div><div id="reviewTests"></div></div>
         </div>
       </div>
       <div class="review-footer"><span style="margin-right:auto;font-size:10px;color:#657581">Drag a rectangle over the source page to re-read a difficult handwritten region.</span><button id="applyReview" class="primary">Apply Reviewed Draft</button></div>
     </div>
   </section>
 
-  <div id="printArea" class="print-area"></div>
-  <div id="toast" class="toast hidden"></div>
-  <script src="/src/ai-model-router.js"></script>
+  <div id="printArea" class="print-area"></div><div id="toast" class="toast hidden"></div>
+  <script src="/src/ai-model-router-v2.js?v=051"></script>
   <script type="module" src="/src/web-app.js"></script>
 </body>
 </html>
